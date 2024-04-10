@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "format": "prettier --write \"dist/**/*.{html,css,js}\"",
+    "build-and-format": "npm run build && npm run format"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
@@ -18,12 +19,10 @@
     "sass": "^1.74.1",
     "vite": "^5.2.0",
     "vite-plugin-ejs": "^1.7.0",
+    "vite-plugin-imagemin": "^0.6.1",
     "vite-plugin-live-reload": "^3.0.3"
   },
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "format": "prettier --write \"dist/**/*.{html,css,js}\"",
-    "build-and-format": "npm run build && npm run format"
+  "dependencies": {
+    "vite-plugin-webp-and-path": "^0.1.4"
   }
 }

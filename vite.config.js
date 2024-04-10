@@ -5,6 +5,9 @@ import { fileURLToPath } from "node:url"; //上記の実行時にURLをpathに�
 import { ViteEjsPlugin } from "vite-plugin-ejs";
 import liveReload from 'vite-plugin-live-reload'; //ライブリロードのプラグイン
 import { SourceMap } from "node:module";
+import VitePluginWebpAndPath from 'vite-plugin-webp-and-path'; //webp画像変換
+import viteImagemin from 'vite-plugin-imagemin';  //画像圧縮
+
 
 
 //JavaScriptファイル名を取得する設定　ignoreでnode_modules内やhtmlディレクトリ内は弾くようにしておく
@@ -53,13 +56,36 @@ const inputObj = Object.fromEntries(
   inputJsArray.concat(inputHtmlArray, inputScssArray)
 );
 
+
 export default defineConfig({
   root: "./src", //開発ディレクトリ設定
   base: "./", //相対パスにするための./とする
 
   plugins: [
     liveReload(['parts/*.ejs']),//開発サーバーのライブリロードに任意のファイルを追加する設定
-    ViteEjsPlugin(),
+    ViteEjsPlugin(),//ejs設定
+    VitePluginWebpAndPath({ //webp画像変換
+      targetDir: './dist/assets/images',  // デフォルトは './dist/'
+			imgExtensions: 'jpg,png',  // デフォルトは 'jpg,png'
+			textExtensions: 'html,css,ejs',  // デフォルトは 'html,css'
+			quality: 80,  // デフォルトは 80
+    }),
+    // viteImagemin({ //画像圧縮
+    //   gifsicle: {
+    //     optimizationLevel: 7,
+    //     interlaced: false,
+    //   },
+    //   optipng: {
+    //     optimizationLevel: 7,
+    //   },
+    //   mozjpeg: {
+    //     quality: 20,
+    //   },
+    //   pngquant: {
+    //     quality: [0.8, 0.9],
+    //     speed: 4,
+    //   },
+    // }),
   ],
 
   css: {
