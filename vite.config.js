@@ -61,6 +61,11 @@ export default defineConfig({
   root: "./src", //開発ディレクトリ設定
   base: "./", //相対パスにするための./とする
 
+  server: {
+    open: '/index.html',
+    port: 3200, // 任意のポート番号を書く
+  },
+
   plugins: [
     liveReload(['parts/*.ejs']),//開発サーバーのライブリロードに任意のファイルを追加する設定
     ViteEjsPlugin(),//ejs設定
