@@ -4,40 +4,18 @@ import path from "node:path"; //上記の実行次にnpmのpathを利用
 import { fileURLToPath } from "node:url"; //上記の実行時にURLをpathに変更させるため
 import { ViteEjsPlugin } from "vite-plugin-ejs";
 import liveReload from 'vite-plugin-live-reload'; //ライブリロードのプラグイン
-
-
-// EJSファイルをHTMLに変換して出力するカスタムプラグイン
-const ejsBuildPlugin = () => {
-  return {
-    name: "vite-plugin-ejs-build",
-    buildStart() {
-      // src/ejs ディレクトリ内の全EJSファイルを検索
-      const files = globSync("src/ejs/**/*.ejs");
-      for (const file of files) {
-        // EJSファイルをHTMLにコンパイル
-        const ejsContent = fs.readFileSync(file, "utf8");
-        const htmlContent = ejs.render(ejsContent);
-        // コンパイル後のHTMLを dist ディレクトリに出力
-        const outPath = path.resolve(__dirname, "dist", path.relative("src/ejs", file).replace(/\.ejs$/, ".html"));
-        fs.mkdirSync(path.dirname(outPath), { recursive: true });
-        fs.writeFileSync(outPath, htmlContent);
-      }
-    },
-  };
-};
+import { SourceMap } from "node:module";
 
 
 //JavaScriptファイル名を取得する設定　ignoreでnode_modules内やhtmlディレクトリ内は弾くようにしておく
-const inputJsArray = globSync("src/**/*.js", {
+const inputJsArray = globSync("./src/**/*.js", {
   ignore: ["node_modules/**", "**/modules/**", "**/html/**"],
 }).map((file) => {
   return [
     path.relative(
       "src/js",
-
       file.slice(0, file.length - path.extname(file).length)
     ),
-
     fileURLToPath(new URL(file, import.meta.url)),
   ];
 });
@@ -49,23 +27,20 @@ const inputHtmlArray = globSync(["src/**/*.html"], {
   return [
     path.relative(
       "src",
-
       file.slice(0, file.length - path.extname(file).length)
     ),
-
     fileURLToPath(new URL(file, import.meta.url)),
   ];
 });
 
 //SCSSファイルを取得する設定
-const inputScssArray = globSync("src/scss/**/*.scss", {
+const inputScssArray = globSync("./src/**/*.scss", {
   ignore: ["src/scss/**/_*.scss"],
 }).map((file) => {
   const fileName = file.slice(file.lastIndexOf('/') + 1, file.length - path.extname(file).length);
   return [
     // path.relative(
     //   "src",
-
     //   file.slice(0, file.length - path.extname(file).length)
     // ),
     fileName,
@@ -83,12 +58,18 @@ export default defineConfig({
   base: "./", //相対パスにするための./とする
 
   plugins: [
+    liveReload(['parts/*.ejs']),//開発サーバーのライブリロードに任意のファイルを追加する設定
     ViteEjsPlugin(),
   ],
+
+  css: {
+    sourceMap: true, // CSSのソースマップを有効化
+  },
 
   build: {
     outDir: "../dist", //出力場所の指定
     emptyOutDir: true, //書き出すときにディレクトリを一旦空にする指定（どちらでもお好きな方で）
+    sourcemap: false, //ソースマップの設定
     rollupOptions: {
       input: inputObj, //Globで該当ファイル名取得してObjectにしたもの
       output: {
