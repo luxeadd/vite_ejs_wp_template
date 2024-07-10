@@ -9,10 +9,9 @@ import VitePluginWebpAndPath from 'vite-plugin-webp-and-path'; //webp画像変�
 import viteImagemin from 'vite-plugin-imagemin';  //画像圧縮
 
 
-
 //JavaScriptファイル名を取得する設定　ignoreでnode_modules内やhtmlディレクトリ内は弾くようにしておく
 const inputJsArray = globSync("./src/**/*.js", {
-  ignore: ["node_modules/**", "**/modules/**", "**/html/**"],
+  ignore: ["src/js/**/_*.js"],
 }).map((file) => {
   return [
     path.relative(
@@ -59,10 +58,10 @@ const inputObj = Object.fromEntries(
 
 export default defineConfig({
   root: "./src", //開発ディレクトリ設定
-  base: "./", //相対パスにするための./とする
+  base: "./", //相対パスに設定
 
   server: {
-    open: '/index.html',
+    open: '/index.html', //ブラウザで開くページを指定
     port: 3200, // 任意のポート番号を書く
   },
 
@@ -99,8 +98,9 @@ export default defineConfig({
 
   build: {
     outDir: "../dist", //出力場所の指定
-    emptyOutDir: true, //書き出すときにディレクトリを一旦空にする指定（どちらでもお好きな方で）
+    emptyOutDir: true, //書き出すときにディレクトリを一旦空にする指定
     sourcemap: false, //ソースマップの設定
+    minify: false, //圧縮を無効化
     rollupOptions: {
       input: inputObj, //Globで該当ファイル名取得してObjectにしたもの
       output: {
