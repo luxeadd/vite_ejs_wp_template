@@ -7,6 +7,7 @@ import liveReload from 'vite-plugin-live-reload'; //ライブリロードのプ�
 import { SourceMap } from "node:module";
 import VitePluginWebpAndPath from 'vite-plugin-webp-and-path'; //webp画像変換
 import viteImagemin from 'vite-plugin-imagemin';  //画像圧縮
+import viteSassGlobImports from 'vite-plugin-sass-glob-import'; // SCSSのインポートを自動化する ワイルドカード
 
 
 /** JavaScript各ファイルの名称、path情報を配列に格納する設定 */
@@ -101,6 +102,7 @@ export default defineConfig({
   // }
 
   plugins: [
+    viteSassGlobImports(),
     liveReload(['parts/*.ejs']),//開発サーバーのライブリロードに任意のファイルを追加する設定
     ViteEjsPlugin(),//ejs設定
     VitePluginWebpAndPath({ //webp画像変換
