@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && prettier --write \"dist/**/*.html\"",
     "format": "prettier --write \"dist/**/*.{html,css,js}\"",
     "build-and-format": "npm run build && npm run format"
   },
