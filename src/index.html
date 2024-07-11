@@ -13,7 +13,7 @@ _%>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="<%= metaInfo.rootDirectory %>scss/style.scss">
+  <link rel="stylesheet" href="<%= metaInfo.rootDirectory %>css/style.scss">
   <script type="module" defer src="<%= metaInfo.rootDirectory %>js/script.js"></script>
   <%- include('./parts/_metadata'); %>
 </head>
@@ -22,6 +22,7 @@ _%>
   <main class="st-glb_mainContent">
     <article class="st-glb_mainContent-article">
       <%- include('./parts/_st-glb_pageHeader'); %>
+      <a href="./news/">お知らせ</a>
       <img src="./assets/images/photo.png" alt="">
     </article>
     <!-- /.main-contents -->
