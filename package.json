@@ -25,5 +25,12 @@
   },
   "dependencies": {
     "vite-plugin-webp-and-path": "^0.1.4"
-  }
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 5%",
+    "iOS >= 9.0",
+    "Android >= 5",
+    "Firefox ESR"
+  ]
 }
