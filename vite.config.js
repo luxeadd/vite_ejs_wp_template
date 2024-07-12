@@ -1,17 +1,17 @@
 import { defineConfig } from 'vite';
-import { globSync } from 'glob'; //ワイルドカードを使って各ファイルの名前を取得し一括で登録するため
-import path from 'node:path'; //上記の実行次にnpmのpathを利用
-import { fileURLToPath } from 'node:url'; //上記の実行時にURLをpathに変更させるため
-import { ViteEjsPlugin } from 'vite-plugin-ejs';
-import liveReload from 'vite-plugin-live-reload'; //ライブリロードのプラグイン
-import { SourceMap } from 'node:module';
+import { globSync } from 'glob'; //各ファイルの名前を取得し一括で登録
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import viteSassGlobImports from 'vite-plugin-sass-glob-import'; // SCSSのインポートを自動化する ワイルドカード使用
+import { ViteEjsPlugin } from 'vite-plugin-ejs'; // ejs使用
+import liveReload from 'vite-plugin-live-reload'; //ライブリロード
 import VitePluginWebpAndPath from 'vite-plugin-webp-and-path'; //webp画像変換
 import viteImagemin from 'vite-plugin-imagemin'; //画像圧縮
-import viteSassGlobImports from 'vite-plugin-sass-glob-import'; // SCSSのインポートを自動化する ワイルドカード
+// import { SourceMap } from 'node:module';
 
 const useWebp = false; // trueにするとwebp画像変換を行う
 
-/** JavaScript各ファイルの名称、path情報を配列に格納する設定 */
+/** 各ファイルの名称、path情報を配列に格納する設定 */
 const inputJsArray = globSync('./src/**/*.js', {
   ignore: ['src/js/**/_*.js']
 }).map((file) => {
@@ -23,8 +23,6 @@ const inputJsArray = globSync('./src/**/*.js', {
     fileURLToPath(new URL(file, import.meta.url))
   ];
 });
-
-/** HTML各ファイルの名称、path情報を配列に格納する設定 */
 const inputHtmlArray = globSync(['src/**/*.html'], {
   ignore: ['node_modules/**']
 }).map((file) => {
@@ -36,8 +34,6 @@ const inputHtmlArray = globSync(['src/**/*.html'], {
     fileURLToPath(new URL(file, import.meta.url))
   ];
 });
-
-/** SCSS各ファイルの名称、path情報を配列に格納する設定 */
 const inputScssArray = globSync('./src/**/*.scss', {
   ignore: ['src/sass/**/_*.scss']
 }).map((file) => {
@@ -55,7 +51,7 @@ const inputScssArray = globSync('./src/**/*.scss', {
   ];
 });
 
-/**　各ファイル情報の配列をまとめて、Objectにする設定 */
+/**　各ファイル情報の配列をまとめて、Objectに設定 */
 const inputObj = Object.fromEntries(
   inputJsArray.concat(inputHtmlArray, inputScssArray)
 );
@@ -64,15 +60,17 @@ const inputObj = Object.fromEntries(
 export default defineConfig({
   root: './src', //開発ディレクトリ設定
   base: './', //相対パスに設定
+  publicDir: '../public', //publicディレクトリ設定
 
   build: {
     outDir: '../dist', //出力場所の指定
-    emptyOutDir: true, //書き出すときにディレクトリを一旦削除する指定
-    sourcemap: false, //ソースマップの設定
+    emptyOutDir: true, //書き出すときにディレクトリを一旦削除
+    sourcemap: false, //jsのソースマップの設定
     minify: false, //圧縮を無効化
     rollupOptions: {
       input: inputObj, //Globで該当ファイル名取得してObjectにしたもの
       output: {
+        //出力時に名前を動的にせずに取得したファイル名で固定
         entryFileNames: `assets/js/[name].js`, //JSの出力設定
         chunkFileNames: `assets/js/modules/[name].js`, //共通使用のModule　JSのの出力設定
         assetFileNames: (assetInfo) => {
@@ -91,8 +89,9 @@ export default defineConfig({
   },
 
   server: {
-    open: '/index.html', //ブラウザで開くページを指定
-    port: 3200 // 任意のポート番号を書く
+    port: 3200, // 任意のポート番号を書く
+    host: true //IPアドレス使用可能
+    // open: '/index.html', //起動時に自動でブラウザで開くページを指定（自動にしない場合はコメントアウト）
   },
 
   // server: { //Docker環境（仮想環境）の場合以下の設定
@@ -105,19 +104,19 @@ export default defineConfig({
   // }
 
   plugins: [
-    viteSassGlobImports(),
-    liveReload(['parts/*.ejs']), //開発サーバーのライブリロードに任意のファイルを追加する設定
-    ViteEjsPlugin(), //ejs設定
+    viteSassGlobImports(), // SCSSのインポートを自動化する
+    liveReload(['parts/*.ejs']), //開発サーバーのライブリロードに任意のファイルを追加
+    ViteEjsPlugin(), //ejs使用
     useWebp
-      ? VitePluginWebpAndPath({
-          //webp画像変換
-          targetDir: './dist/', //対象ディレクトリ
-          imgExtensions: 'jpg,png', // 対象拡張子
-          textExtensions: 'html,css,ejs,js,php', //対象ファイル
-          quality: 80 //画像クオリティ設定
+      ? //webp画像変換
+        VitePluginWebpAndPath({
+          targetDir: './dist/',
+          imgExtensions: 'jpg,png',
+          textExtensions: 'html,css,ejs,js,php',
+          quality: 80
         })
-      : viteImagemin({
-          //画像圧縮
+      : //画像圧縮
+        viteImagemin({
           gifsicle: {
             optimizationLevel: 7,
             interlaced: false
@@ -133,9 +132,5 @@ export default defineConfig({
             speed: 4
           }
         })
-  ],
-
-  css: {
-    SourceMap: true // CSSのソースマップを有効化
-  }
+  ]
 });
