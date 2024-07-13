@@ -88,6 +88,10 @@ export default defineConfig({
     }
   },
 
+  css : { //ソースマップの指定
+    devSourcemap: true
+  },
+
   server: {
     port: 3200, // 任意のポート番号を書く
     host: true //IPアドレス使用可能
@@ -104,8 +108,8 @@ export default defineConfig({
   // }
 
   plugins: [
-    viteSassGlobImports(), // SCSSのインポートを自動化する
-    liveReload(['parts/*.ejs']), //開発サーバーのライブリロードに任意のファイルを追加
+    viteSassGlobImports(), // SCSSのインポートを自動化する（ワイルドカード使用可能）
+    liveReload(['parts/*.ejs', 'common/*.ejs', '../public/**/*.php']),//指定したファイルでもライブリロード可能にする
     ViteEjsPlugin(), //ejs使用
     useWebp
       ? //webp画像変換
@@ -113,24 +117,36 @@ export default defineConfig({
           targetDir: './dist/',
           imgExtensions: 'jpg,png',
           textExtensions: 'html,css,ejs,js,php',
-          quality: 80
+          quality: 80,
+          preserveOriginal: true // 元の画像を残す
         })
       : //画像圧縮
-        viteImagemin({
-          gifsicle: {
-            optimizationLevel: 7,
-            interlaced: false
-          },
-          optipng: {
-            optimizationLevel: 7
-          },
-          mozjpeg: {
-            quality: 20
-          },
-          pngquant: {
-            quality: [0.8, 0.9],
-            speed: 4
-          }
-        })
+      viteImagemin({
+        gifsicle: {
+          optimizationLevel: 7,
+          interlaced: false,
+        },
+        optipng: {
+          optimizationLevel: 7,
+        },
+        mozjpeg: {
+          quality: 20,
+        },
+        pngquant: {
+          quality: [0.8, 0.9],
+          speed: 4,
+        },
+        svgo: {
+          plugins: [
+            {
+              name: 'removeViewBox',
+            },
+            {
+              name: 'removeEmptyAttrs',
+              active: false,
+            },
+          ],
+        },
+      }),
   ]
 });
