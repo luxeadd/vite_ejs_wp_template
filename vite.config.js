@@ -7,40 +7,26 @@ import { ViteEjsPlugin } from 'vite-plugin-ejs'; // ejs使用
 import liveReload from 'vite-plugin-live-reload'; //ライブリロード
 import VitePluginWebpAndPath from 'vite-plugin-webp-and-path'; //webp画像変換
 import viteImagemin from 'vite-plugin-imagemin'; //画像圧縮
+import { fallbackSettings } from './config.js'; //config.jsから設定を取得
 // import { SourceMap } from 'node:module';
 
-const useWebp = true; // trueにするとwebp画像変換を行う
+const { fallbackWebp } = fallbackSettings;//普段はfalseで使用（webp単体）フォールバックが必要な場合のみbuild後にpicture.ejsの定数fallbackをtrueにした上で、fallbackWebpをtrueにする
 
 /** 各ファイルの名称、path情報を配列に格納する設定 */
 const inputJsArray = globSync('./src/**/*.js', {
   ignore: ['src/js/**/_*.js']
 }).map((file) => {
-  return [
-    path.relative(
-      'src/js',
-      file.slice(0, file.length - path.extname(file).length)
-    ),
-    fileURLToPath(new URL(file, import.meta.url))
-  ];
+  return [path.relative('src/js', file.slice(0, file.length - path.extname(file).length)), fileURLToPath(new URL(file, import.meta.url))];
 });
 const inputHtmlArray = globSync(['src/**/*.html'], {
   ignore: ['node_modules/**']
 }).map((file) => {
-  return [
-    path.relative(
-      'src',
-      file.slice(0, file.length - path.extname(file).length)
-    ),
-    fileURLToPath(new URL(file, import.meta.url))
-  ];
+  return [path.relative('src', file.slice(0, file.length - path.extname(file).length)), fileURLToPath(new URL(file, import.meta.url))];
 });
 const inputScssArray = globSync('./src/**/*.scss', {
   ignore: ['src/sass/**/_*.scss']
 }).map((file) => {
-  const fileName = file.slice(
-    file.lastIndexOf('/') + 1,
-    file.length - path.extname(file).length
-  );
+  const fileName = file.slice(file.lastIndexOf('/') + 1, file.length - path.extname(file).length);
   return [
     // path.relative(
     //   "src",
@@ -52,9 +38,7 @@ const inputScssArray = globSync('./src/**/*.scss', {
 });
 
 /** 各ファイル情報の配列をまとめて、Objectに設定 */
-const inputObj = Object.fromEntries(
-  inputJsArray.concat(inputHtmlArray, inputScssArray)
-);
+const inputObj = Object.fromEntries(inputJsArray.concat(inputHtmlArray, inputScssArray));
 
 /** Viteの設定 */
 export default defineConfig({
@@ -64,7 +48,7 @@ export default defineConfig({
 
   build: {
     outDir: '../dist', //出力場所の指定
-    emptyOutDir: true, //書き出すときにディレクトリを一旦削除
+    emptyOutDir: fallbackWebp ? false : true, // fallbackWebpがtrueの場合はディレクトリを削除しない
     sourcemap: false, //jsのソースマップの設定
     minify: false, //圧縮を無効化
     rollupOptions: {
@@ -88,7 +72,8 @@ export default defineConfig({
     }
   },
 
-  css : { //ソースマップの指定
+  css: {
+    //ソースマップの指定
     devSourcemap: true
   },
 
@@ -109,44 +94,46 @@ export default defineConfig({
 
   plugins: [
     viteSassGlobImports(), // SCSSのインポートを自動化する（ワイルドカード使用可能）
-    liveReload(['parts/*.ejs', 'common/*.ejs', '../public/**/*.php']),//指定したファイルでもライブリロード可能にする
-    ViteEjsPlugin(), //ejs使用
-    useWebp
-      ? //webp画像変換
+    liveReload(['parts/*.ejs', 'common/*.ejs', '../public/**/*.php']), //指定したファイルでもライブリロード可能にする
+    ViteEjsPlugin({
+      fallbackWebp: fallbackWebp
+    }),
+    fallbackWebp
+      ? //画像圧縮
+        viteImagemin({
+          gifsicle: {
+            optimizationLevel: 7,
+            interlaced: false
+          },
+          optipng: {
+            optimizationLevel: 7
+          },
+          mozjpeg: {
+            quality: 20
+          },
+          pngquant: {
+            quality: [0.8, 0.9],
+            speed: 4
+          },
+          svgo: {
+            plugins: [
+              {
+                name: 'removeViewBox'
+              },
+              {
+                name: 'removeEmptyAttrs',
+                active: false
+              }
+            ]
+          }
+        })
+      : //webp画像変換
         VitePluginWebpAndPath({
           targetDir: './dist/',
           imgExtensions: 'jpg,png',
           textExtensions: 'html,css,ejs,js,php',
           quality: 80,
           preserveOriginal: true // 元の画像を残す
-        })
-      : //画像圧縮
-      viteImagemin({
-        gifsicle: {
-          optimizationLevel: 7,
-          interlaced: false,
-        },
-        optipng: {
-          optimizationLevel: 7,
-        },
-        mozjpeg: {
-          quality: 20,
-        },
-        pngquant: {
-          quality: [0.8, 0.9],
-          speed: 4,
-        },
-        svgo: {
-          plugins: [
-            {
-              name: 'removeViewBox',
-            },
-            {
-              name: 'removeEmptyAttrs',
-              active: false,
-            },
-          ],
-        },
-      }),
+        }),
   ]
 });

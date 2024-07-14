@@ -1,156 +1,159 @@
-const header = document.querySelector('.js-header');
-const hamburger = document.querySelector('.js-hamburger');
-const spHeaderMenu = document.querySelector('.js-drawer-menu');
-const drawerMenuItems = document.querySelectorAll('.js-drawer-menu__item');
+const header = document.querySelector(".js-header");
+const hamburger = document.querySelector(".js-hamburger");
+const spHeaderMenu = document.querySelector(".js-drawer-menu");
+const drawerMenuItems = document.querySelectorAll(".js-drawer-menu__item");
 function toggleDrawer(isOpen) {
-  const expanded = isOpen ? 'false' : 'true';
-  const hidden = isOpen ? 'true' : 'false';
-  hamburger.setAttribute('aria-expanded', expanded);
-  spHeaderMenu.setAttribute('aria-hidden', hidden);
-  header.classList.toggle('is_active', !isOpen);
+  const expanded = isOpen ? "false" : "true";
+  const hidden = isOpen ? "true" : "false";
+  hamburger.setAttribute("aria-expanded", expanded);
+  spHeaderMenu.setAttribute("aria-hidden", hidden);
+  header.classList.toggle("is_active", !isOpen);
 }
-hamburger.addEventListener('click', function () {
-  const isOpen = this.getAttribute('aria-expanded') === 'true';
+hamburger.addEventListener("click", function() {
+  const isOpen = this.getAttribute("aria-expanded") === "true";
   toggleDrawer(isOpen);
 });
 drawerMenuItems.forEach((item) => {
-  item.addEventListener('click', () => toggleDrawer(true));
+  item.addEventListener("click", () => toggleDrawer(true));
 });
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') {
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") {
     toggleDrawer(true);
   }
 });
-let jsPageTopBtn = document.querySelector('.js-page-top');
+let jsPageTopBtn = document.querySelector(".js-page-top");
 if (jsPageTopBtn) {
-  let getScrolled = function () {
+  let getScrolled = function() {
     return window.pageYOffset !== void 0 ? window.pageYOffset : document.documentElement.scrollTop;
   };
   var getScrolled2 = getScrolled;
-  window.onscroll = function () {
-    getScrolled() > 1e3 ? jsPageTopBtn.classList.add('is-active') : jsPageTopBtn.classList.remove('is-active');
+  window.onscroll = function() {
+    getScrolled() > 1e3 ? jsPageTopBtn.classList.add("is-active") : jsPageTopBtn.classList.remove("is-active");
   };
 }
-if (document.querySelector('.js-accordion__btn')) {
-  document.querySelectorAll('.js-accordion__btn').forEach(function (button) {
-    button.addEventListener('click', function () {
-      var expanded = this.getAttribute('aria-expanded') === 'true' || false;
-      this.setAttribute('aria-expanded', !expanded);
+if (document.querySelector(".js-accordion__btn")) {
+  document.querySelectorAll(".js-accordion__btn").forEach(function(button) {
+    button.addEventListener("click", function() {
+      var expanded = this.getAttribute("aria-expanded") === "true" || false;
+      this.setAttribute("aria-expanded", !expanded);
       var body = this.nextElementSibling;
       if (body) {
-        body.setAttribute('aria-hidden', expanded);
+        body.setAttribute("aria-hidden", expanded);
       }
     });
   });
 }
-document.addEventListener('DOMContentLoaded', () => {
-  const modalTriggers = document.querySelectorAll('[data-modal-open]');
+document.addEventListener("DOMContentLoaded", () => {
+  const modalTriggers = document.querySelectorAll("[data-modal-open]");
   modalTriggers.forEach((trigger) => {
-    trigger.addEventListener('click', () => {
-      const modalId = trigger.getAttribute('data-modal-open');
+    trigger.addEventListener("click", () => {
+      const modalId = trigger.getAttribute("data-modal-open");
       const modal = document.getElementById(modalId);
       if (modal) {
         modal.showModal();
       }
     });
   });
-  const closeButtons = document.querySelectorAll('[data-modal-close]');
+  const closeButtons = document.querySelectorAll("[data-modal-close]");
   closeButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const modal = button.closest('dialog');
+    button.addEventListener("click", () => {
+      const modal = button.closest("dialog");
       if (modal) {
         modal.close();
       }
     });
   });
-  const modalDialog = document.querySelectorAll('.js-modalDialog');
+  const modalDialog = document.querySelectorAll(".js-modalDialog");
   modalDialog.forEach((dialog) => {
-    dialog.addEventListener('click', (event) => {
-      if (event.target.closest('.js-modalContainer') === null) {
+    dialog.addEventListener("click", (event) => {
+      if (event.target.closest(".js-modalContainer") === null) {
         dialog.close();
       }
     });
   });
 });
-document.addEventListener('DOMContentLoaded', function () {
-  const firstTarget = document.querySelector('.js-works-tab-target');
+document.addEventListener("DOMContentLoaded", function() {
+  const firstTarget = document.querySelector(".js-works-tab-target");
   if (firstTarget) {
-    firstTarget.classList.add('is-active');
+    firstTarget.classList.add("is-active");
   }
 });
-const tabs = document.querySelectorAll('.js-works-tab');
+const tabs = document.querySelectorAll(".js-works-tab");
 tabs.forEach((tab, index) => {
-  tab.addEventListener('click', () => {
-    const targets = document.querySelectorAll('.js-works-tab-target');
-    tabs.forEach((t) => t.classList.remove('is-active'));
-    tab.classList.add('is-active');
+  tab.addEventListener("click", () => {
+    const targets = document.querySelectorAll(".js-works-tab-target");
+    tabs.forEach((t) => t.classList.remove("is-active"));
+    tab.classList.add("is-active");
     targets.forEach((target) => {
-      target.classList.remove('is-active');
+      target.classList.remove("is-active");
     });
-    targets[index].classList.add('is-active');
+    targets[index].classList.add("is-active");
   });
 });
 function initializeSmoothScroll() {
   var anchorLinks = document.querySelectorAll('a[href*="#"]');
-  if (anchorLinks.length === 0) return;
-  anchorLinks.forEach(function (anchorLink) {
-    anchorLink.addEventListener('click', handleClick, false);
+  if (anchorLinks.length === 0)
+    return;
+  anchorLinks.forEach(function(anchorLink) {
+    anchorLink.addEventListener("click", handleClick, false);
   });
 }
 function isHeaderFixed(header2) {
   var position = window.getComputedStyle(header2).position;
-  var isFixed = position === 'fixed' || position === 'sticky';
+  var isFixed = position === "fixed" || position === "sticky";
   return isFixed;
 }
 function getHeaderBlockSize() {
-  var header2 = document.querySelector('[data-fixed-header]');
-  var headerBlockSize = header2 && isHeaderFixed(header2) ? window.getComputedStyle(header2).blockSize : '0';
+  var header2 = document.querySelector("[data-fixed-header]");
+  var headerBlockSize = header2 && isHeaderFixed(header2) ? window.getComputedStyle(header2).blockSize : "0";
   return headerBlockSize;
 }
-console.log('ヘッダーの高さ' + getHeaderBlockSize());
+console.log("ヘッダーの高さ" + getHeaderBlockSize());
 function scrollToTarget(element) {
   var headerBlockSize = getHeaderBlockSize();
   element.style.scrollMarginBlockStart = headerBlockSize;
-  var isPrefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var scrollBehavior = isPrefersReduced ? 'instant' : 'smooth';
-  element.scrollIntoView({ behavior: scrollBehavior, inline: 'end' });
+  var isPrefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var scrollBehavior = isPrefersReduced ? "instant" : "smooth";
+  element.scrollIntoView({ behavior: scrollBehavior, inline: "end" });
 }
 function focusTarget(element) {
   element.focus({ preventScroll: true });
   if (document.activeElement !== element) {
-    element.setAttribute('tabindex', '-1');
+    element.setAttribute("tabindex", "-1");
     element.focus({ preventScroll: true });
   }
 }
 function handleClick(event) {
-  if (event.button !== 0) return;
+  if (event.button !== 0)
+    return;
   var currentLink = event.currentTarget;
   var hash = currentLink.hash;
-  if (!currentLink || !hash || currentLink.getAttribute('role') === 'tab' || currentLink.getAttribute('role') === 'button' || currentLink.getAttribute('data-smooth-scroll') === 'disabled') return;
-  var target = document.getElementById(decodeURIComponent(hash.slice(1))) || (hash === '#top' && document.body);
+  if (!currentLink || !hash || currentLink.getAttribute("role") === "tab" || currentLink.getAttribute("role") === "button" || currentLink.getAttribute("data-smooth-scroll") === "disabled")
+    return;
+  var target = document.getElementById(decodeURIComponent(hash.slice(1))) || hash === "#top" && document.body;
   if (target) {
     event.preventDefault();
     scrollToTarget(target);
     focusTarget(target);
-    if (!(hash === '#top')) {
-      history.pushState({}, '', hash);
+    if (!(hash === "#top")) {
+      history.pushState({}, "", hash);
     }
   }
 }
 function initializePopoverMenu(popoverElement) {
-  var anchorLinks = popoverElement.querySelectorAll('a');
+  var anchorLinks = popoverElement.querySelectorAll("a");
   if (anchorLinks.length > 0) {
-    anchorLinks.forEach(function (link) {
+    anchorLinks.forEach(function(link) {
       link.addEventListener(
-        'click',
-        function (event) {
+        "click",
+        function(event) {
           handleHashlinkClick(event, popoverElement);
         },
         false
       );
       link.addEventListener(
-        'blur',
-        function (event) {
+        "blur",
+        function(event) {
           handleFocusableElementsBlur(event, popoverElement);
         },
         false
@@ -167,16 +170,16 @@ function handleFocusableElementsBlur(event, popover) {
     popover.hidePopover();
   }
 }
-var drawer = document.getElementById('drawer');
-document.addEventListener('DOMContentLoaded', function () {
+var drawer = document.getElementById("drawer");
+document.addEventListener("DOMContentLoaded", function() {
   initializeSmoothScroll();
   if (drawer) {
     initializePopoverMenu(drawer);
   }
 });
-document.addEventListener('DOMContentLoaded', function () {
-  if (document.querySelector('.js-flow-swiper')) {
-    new Swiper('.js-flow-swiper', {
+document.addEventListener("DOMContentLoaded", function() {
+  if (document.querySelector(".js-flow-swiper")) {
+    new Swiper(".js-flow-swiper", {
       width: 300,
       spaceBetween: 40,
       // スライド間の余白（px）
@@ -203,28 +206,29 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
-document.addEventListener('DOMContentLoaded', function () {
-  const cardsList = document.querySelectorAll('.js-cards');
+document.addEventListener("DOMContentLoaded", function() {
+  const cardsList = document.querySelectorAll(".js-cards");
   cardsList.forEach((cards) => {
     let isDown = false;
     let startX;
     let scrollLeft;
-    cards.addEventListener('mousedown', (e) => {
+    cards.addEventListener("mousedown", (e) => {
       isDown = true;
-      cards.classList.add('active');
+      cards.classList.add("active");
       startX = e.pageX - cards.offsetLeft;
       scrollLeft = cards.scrollLeft;
     });
-    cards.addEventListener('mouseleave', () => {
+    cards.addEventListener("mouseleave", () => {
       isDown = false;
-      cards.classList.remove('active');
+      cards.classList.remove("active");
     });
-    cards.addEventListener('mouseup', () => {
+    cards.addEventListener("mouseup", () => {
       isDown = false;
-      cards.classList.remove('active');
+      cards.classList.remove("active");
     });
-    cards.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
+    cards.addEventListener("mousemove", (e) => {
+      if (!isDown)
+        return;
       e.preventDefault();
       const x = e.pageX - cards.offsetLeft;
       const walk = (x - startX) * 3;
