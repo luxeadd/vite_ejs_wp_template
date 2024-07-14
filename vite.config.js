@@ -9,7 +9,7 @@ import VitePluginWebpAndPath from 'vite-plugin-webp-and-path'; //webp画像変�
 import viteImagemin from 'vite-plugin-imagemin'; //画像圧縮
 // import { SourceMap } from 'node:module';
 
-const useWebp = false; // trueにするとwebp画像変換を行う
+const useWebp = true; // trueにするとwebp画像変換を行う
 
 /** 各ファイルの名称、path情報を配列に格納する設定 */
 const inputJsArray = globSync('./src/**/*.js', {
@@ -51,7 +51,7 @@ const inputScssArray = globSync('./src/**/*.scss', {
   ];
 });
 
-/**　各ファイル情報の配列をまとめて、Objectに設定 */
+/** 各ファイル情報の配列をまとめて、Objectに設定 */
 const inputObj = Object.fromEntries(
   inputJsArray.concat(inputHtmlArray, inputScssArray)
 );
