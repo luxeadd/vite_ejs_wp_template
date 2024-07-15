@@ -1,11 +1,11 @@
 <% 
 const baseMeta = { 
-	title:'トップページ', 
+	title:'お知らせ', 
 	desc:'ディスクリプション',
-	path:'./',
+	path:'../',
 	incPath:'',
-	page:'top',
-	image:'./assets/images/',
+	page:'sub',
+	image:'../assets/images/',
 	}; 
 %>
 
@@ -83,7 +83,6 @@ const baseMeta = {
 },
 ] %>
 
-
 <!DOCTYPE html>
 <html lang="ja">
 <%- include(baseMeta.incPath + 'common/_head', { baseMeta:baseMeta } ) %>
@@ -95,6 +94,7 @@ const baseMeta = {
     <main>
 
       <div class="p-mv">
+        <h2>お知らせ</h2>
         <%- include(baseMeta.incPath +'common/_picture', 
       { 
         baseMeta:baseMeta, 
