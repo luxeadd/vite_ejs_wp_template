@@ -1,13 +1,4 @@
 <head>
-  <% 
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = ('0' + (now.getMonth() + 1)).slice(-2);
-  const day = ('0' + now.getDate()).slice(-2);
-  const hours = ('0' + now.getHours()).slice(-2);
-  const minutes = ('0' + now.getMinutes()).slice(-2);
-  const version = `${year}${month}${day}${hours}${minutes}`;
-  %>
   <meta name="robots" content="noindex" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
@@ -35,4 +26,28 @@
   <!-- JavaScript -->
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script type="module" defer src="<%- baseMeta.path %>js/script.js"></script>
+  <script>
+    // cssとjsにキャッシュ対策のパラメーター付与
+    document.addEventListener("DOMContentLoaded", function() {
+      const now = new Date();
+      now.setHours(now.getHours() + 9);
+      const year = now.getFullYear();
+      const month = ('0' + (now.getMonth() + 1)).slice(-2);
+      const day = ('0' + now.getDate()).slice(-2);
+      const hours = ('0' + now.getHours()).slice(-2);
+      const minutes = ('0' + now.getMinutes()).slice(-2);
+      const timestamp = `${year}${month}${day}${hours}${minutes}`;
+      const cssLink = document.querySelector('link[href*="style.css"]');
+      if (cssLink) {
+        const href = cssLink.getAttribute('href');
+        cssLink.setAttribute('href', `${href}?v=${timestamp}`);
+      }
+      const script = document.querySelector('script[src*="script.js"]');
+      if (script) {
+        const src = script.getAttribute('src');
+        script.setAttribute('src', `${src}?v=${timestamp}`);
+      }
+    });
+  </script>
+
 </head>
