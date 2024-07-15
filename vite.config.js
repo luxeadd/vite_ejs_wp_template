@@ -7,7 +7,7 @@ import { ViteEjsPlugin } from 'vite-plugin-ejs'; // ejs使用
 import liveReload from 'vite-plugin-live-reload'; //ライブリロード
 import VitePluginWebpAndPath from 'vite-plugin-webp-and-path'; //webp画像変換
 import viteImagemin from 'vite-plugin-imagemin'; //画像圧縮
-import { fallbackSettings } from './config.js'; //config.jsから設定を取得
+import { fallbackSettings } from './ejs.config.js'; //config.jsから設定を取得
 // import { SourceMap } from 'node:module';
 
 const { fallbackWebp } = fallbackSettings;//普段はfalseで使用（webp単体）フォールバックが必要な場合のみbuild後にpicture.ejsの定数fallbackをtrueにした上で、fallbackWebpをtrueにする
