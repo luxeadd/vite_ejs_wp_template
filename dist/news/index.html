@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta name="format-detection" content="telephone=no" />
     <!-- meta情報 -->
-    <title>トップページ</title>
+    <title>お知らせ</title>
     <meta name="description" content="ディスクリプション" />
     <meta name="keywords" content="" />
     <!-- ogp -->
@@ -26,9 +26,9 @@
     <!-- css -->
     <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script type="module" crossorigin src="./assets/js/modules/modulepreload-polyfill.js"></script>
-    <script type="module" crossorigin src="./assets/js/script.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/css/style.css" />
+    <script type="module" crossorigin src="../assets/js/modules/modulepreload-polyfill.js"></script>
+    <script type="module" crossorigin src="../assets/js/script.js"></script>
+    <link rel="stylesheet" crossorigin href="../assets/css/style.css" />
   </head>
   <body id="top">
     <div class="siteWrapper">
@@ -36,11 +36,11 @@
       <header class="l-header p-header js-header" data-fixed-header>
         <div class="p-header__inner">
           <!-- ヘッダーロゴ -->
-          <h1 class="p-header__logo">
+          <div class="p-header__logo">
             <a href="/">
               <img src="./assets/images/common/logo.webp" alt="ロゴ" />
             </a>
-          </h1>
+          </div>
           <!-- pcーメニュー -->
           <nav class="p-header__pc-menu p-header-menu">
             <ul class="p-header-menu__items">
@@ -83,15 +83,16 @@
       </header>
       <main>
         <div class="p-mv">
+          <h2>お知らせ</h2>
           <picture>
-            <source srcset="./assets/images/common/image1_sp.webp" width="300" height="300" media="(max-width:767px)" />
-            <img src="./assets/images/common/image1.webp" alt="ダミー画像" width="800" height="800" decoding="async" loading="lazy" />
+            <source srcset="../assets/images/common/image1_sp.webp" width="300" height="300" media="(max-width:767px)" />
+            <img src="../assets/images/common/image1.webp" alt="ダミー画像" width="800" height="800" decoding="async" loading="lazy" />
           </picture>
         </div>
         <div id="sec1" class="p-mv">
           <picture>
-            <source srcset="./assets/images/common/image1_sp.webp" width="300" height="300" media="(max-width:767px)" />
-            <img src="./assets/images/common/image1.webp" alt="ダミー画像" width="800" height="800" decoding="async" loading="lazy" />
+            <source srcset="../assets/images/common/image1_sp.webp" width="300" height="300" media="(max-width:767px)" />
+            <img src="../assets/images/common/image1.webp" alt="ダミー画像" width="800" height="800" decoding="async" loading="lazy" />
           </picture>
         </div>
         <div class="l-inner">
@@ -118,7 +119,7 @@
             <button class="c-panel" data-modal-open="medicalModal1">
               <span class="c-panel__img">
                 <picture>
-                  <img src="./assets/images/common/image1.webp" alt="" />
+                  <img src="../assets/images/common/image1.webp" alt="" />
                 </picture>
               </span>
               <span class="c-panel__text">歯列矯正</span>
@@ -126,7 +127,7 @@
             <button class="c-panel" data-modal-open="medicalModal2">
               <span class="c-panel__img">
                 <picture>
-                  <img src="./assets/images/common/image1.webp" alt="" />
+                  <img src="../assets/images/common/image1.webp" alt="" />
                 </picture>
               </span>
               <span class="c-panel__text">リンガルブラケット<br />矯正</span>
@@ -134,7 +135,7 @@
             <button class="c-panel" data-modal-open="medicalModal3">
               <span class="c-panel__img">
                 <picture>
-                  <img src="./assets/images/common/image1.webp" alt="" />
+                  <img src="../assets/images/common/image1.webp" alt="" />
                 </picture>
               </span>
               <span class="c-panel__text">マウスピース矯正</span>
@@ -142,7 +143,7 @@
             <button class="c-panel" data-modal-open="medicalModal4">
               <span class="c-panel__img">
                 <picture>
-                  <img src="./assets/images/common/image1.webp" alt="" />
+                  <img src="../assets/images/common/image1.webp" alt="" />
                 </picture>
               </span>
               <span class="c-panel__text">ホーム<br />ホワイトニング</span>
@@ -153,8 +154,8 @@
               <div class="c-modalMedical__inner">
                 <div class="c-modalMedical__img">
                   <picture>
-                    <source srcset="./assets/images/common/image1.webp" media="(max-width:767px)" />
-                    <img src="./assets/images/common/image1.webp" alt="" decoding="async" loading="lazy" />
+                    <source srcset="../assets/images/common/image1.webp" media="(max-width:767px)" />
+                    <img src="../assets/images/common/image1.webp" alt="" decoding="async" loading="lazy" />
                   </picture>
                 </div>
                 <div class="c-modalMedical__head">
@@ -174,8 +175,8 @@
               <div class="c-modalMedical__inner">
                 <div class="c-modalMedical__img">
                   <picture>
-                    <source srcset="./assets/images/common/image1.webp" media="(max-width:767px)" />
-                    <img src="./assets/images/common/image1.webp" alt="" decoding="async" loading="lazy" />
+                    <source srcset="../assets/images/common/image1.webp" media="(max-width:767px)" />
+                    <img src="../assets/images/common/image1.webp" alt="" decoding="async" loading="lazy" />
                   </picture>
                 </div>
                 <div class="c-modalMedical__head">
@@ -195,8 +196,8 @@
               <div class="c-modalMedical__inner">
                 <div class="c-modalMedical__img">
                   <picture>
-                    <source srcset="./assets/images/common/image1.webp" media="(max-width:767px)" />
-                    <img src="./assets/images/common/image1.webp" alt="" decoding="async" loading="lazy" />
+                    <source srcset="../assets/images/common/image1.webp" media="(max-width:767px)" />
+                    <img src="../assets/images/common/image1.webp" alt="" decoding="async" loading="lazy" />
                   </picture>
                 </div>
                 <div class="c-modalMedical__head">
@@ -216,8 +217,8 @@
               <div class="c-modalMedical__inner">
                 <div class="c-modalMedical__img">
                   <picture>
-                    <source srcset="./assets/images/common/image1.webp" media="(max-width:767px)" />
-                    <img src="./assets/images/common/image1.webp" alt="" decoding="async" loading="lazy" />
+                    <source srcset="../assets/images/common/image1.webp" media="(max-width:767px)" />
+                    <img src="../assets/images/common/image1.webp" alt="" decoding="async" loading="lazy" />
                   </picture>
                 </div>
                 <div class="c-modalMedical__head">
