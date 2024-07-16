@@ -9,7 +9,7 @@
       menu3:'サステナビリティ',
       menu3Link:'#sec2',
       menu4:'お知らせ',
-      menu4Link:'./news/',
+      menu4Link:'news/',
       menu5:'採用情報',
       menu5Link:'#sec4',
       menu6:'お問い合わせ',
@@ -43,9 +43,9 @@
             <li class="p-header-menu__subItem"><a href="">沿革</a></li>
           </ul>
         </li>
-        <li class="p-header-menu__item"><a href="<%= headerMenuList.menu2Link %>"><%= headerMenuList.menu2 %></a></li>
+        <li class="p-header-menu__item"><a href="<%- baseMeta.path %><%= headerMenuList.menu2Link %>"><%= headerMenuList.menu2 %></a></li>
         <li class="p-header-menu__item"><a href="<%= headerMenuList.menu3Link %>"><%= headerMenuList.menu3 %></a></li>
-        <li class="p-header-menu__item"><a href="<%= headerMenuList.menu4Link %>"><%= headerMenuList.menu4 %></a></li>
+        <li class="p-header-menu__item"><a href="<%- baseMeta.path %><%= headerMenuList.menu4Link %>"><%= headerMenuList.menu4 %></a></li>
         <li class="p-header-menu__item"><a href="<%= headerMenuList.menu5Link %>"><%= headerMenuList.menu5 %></a></li>
         <li class="p-header-menu__btn"><a href="<%= headerMenuList.menu6Link %>" class="c-btn c-btn--mail"><%= headerMenuList.menu6 %></a></li>
       </ul>
@@ -62,7 +62,7 @@
         <li class="p-drawer-menu__item js-drawer-menu__item"><a href="<%= headerMenuList.menu1Link %>"><%= headerMenuList.menu1 %></a></li>
         <li class="p-drawer-menu__item js-drawer-menu__item"><a href="<%= headerMenuList.menu2Link %>"><%= headerMenuList.menu2 %></a></li>
         <li class="p-drawer-menu__item js-drawer-menu__item"><a href="<%= headerMenuList.menu3Link %>"><%= headerMenuList.menu3 %></a></li>
-        <li class="p-drawer-menu__item js-drawer-menu__item"><a href="<%= headerMenuList.menu4Link %>"><%= headerMenuList.menu4 %></a></li>
+        <li class="p-drawer-menu__item js-drawer-menu__item"><a href="<%- baseMeta.path %><%= headerMenuList.menu4Link %>"><%= headerMenuList.menu4 %></a></li>
         <li class="p-drawer-menu__item js-drawer-menu__item"><a href="<%= headerMenuList.menu5Link %>"><%= headerMenuList.menu5 %></a></li>
         <li class="p-drawer-menu__item js-drawer-menu__item"><a href="<%= headerMenuList.menu6Link %>"><%= headerMenuList.menu6 %></a></li>
       </ul>
