@@ -5,12 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && prettier --write 'dist/**/*.html' 'dist/*.html' && find dist -type f -name '*.html' -exec sed -i '' '/^$/d' {} + && node cacheTimestamp.js",
-    "format": "prettier --write dist/**/*.{html,css,js}",
-    "build-and-format": "npm run build && npm run format",
-    "set-fallback-true": "node fallbackImage.js true",
-    "set-fallback-false": "node fallbackImage.js false",
-    "build-fallback": "npm run set-fallback-true && npm run build && npm run set-fallback-false"
+    "build": "vite build",
+    "format": "prettier --write 'dist/**/*.html' 'dist/*.html' && find dist -type f -name '*.html' -exec sed -i '' '/^$/d' {} + && node buildScript/cacheTimestamp.js",
+    "build-format": "npm run build && npm run format",
+    "build-fallback": "node buildScript/fallbackImage.js true && npm run build && node buildScript/fallbackImage.js false",
+    "build-fallback-format": "node buildScript/fallbackImage.js true && npm run build && node buildScript/fallbackImage.js false && npm run format"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
