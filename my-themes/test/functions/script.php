@@ -5,6 +5,8 @@
  * @codex https://wpdocs.osdn.jp/%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BC
  */
 
+define('WORDPRESS_DEV', true);
+
 function my_script_init()
 {
 	wp_deregister_script('jquery');
@@ -16,13 +18,16 @@ function my_script_init()
 	wp_enqueue_style('my-swiper-css', '//unpkg.com/swiper@8/swiper-bundle.min.css');
 	//swiper.js読み込み
 	wp_enqueue_script('my-swiper', '//unpkg.com/swiper@8/swiper-bundle.min.js');
+	// 環境設定に基づいてアセットを読み込む
+	if (WORDPRESS_DEV) {
 		// 開発環境ではViteの開発サーバーからアセットを読み込む
 		wp_enqueue_style('vite-css', 'http://localhost:3200/sass/style.scss', [], null);
 		wp_enqueue_script('vite-js', 'http://localhost:3200/js/script.js', [], null, true);
-
-		// 本番環境ではビルドされたアセットを読み込む
-		// wp_enqueue_style('my-css', get_template_directory_uri() . '/assets/css/style.css', array(), filemtime(get_template_directory() . '/assets/css/style.css'), 'all');
-		// wp_enqueue_script('my-js', get_template_directory_uri() . '/assets/js/script.js', array(), '1.0.1', true);
+	} else {
+		//本番環境ではビルドされたアセットを読み込む
+		wp_enqueue_style('my-css', get_template_directory_uri() . '/assets/css/style.css', array(), filemtime(get_template_directory() . '/assets/css/style.css'), 'all');
+		wp_enqueue_script('my-js', get_template_directory_uri() . '/assets/js/script.js', array(), '1.0.1', true);
+	}
 }
 add_action('wp_enqueue_scripts', 'my_script_init');
 

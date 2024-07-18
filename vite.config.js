@@ -7,9 +7,11 @@ import { ViteEjsPlugin } from 'vite-plugin-ejs'; // ejs使用
 import liveReload from 'vite-plugin-live-reload'; //ライブリロード
 import VitePluginWebpAndPath from 'vite-plugin-webp-and-path'; //webp画像変換
 import viteImagemin from 'vite-plugin-imagemin'; //画像圧縮
-import { devSettings } from './dev.config.js'; //dev.config.jsから設定を取得
+import fs from 'fs';
 
-const { fallbackImage, wordpress, WordPressPort, WordPressThemeName } = devSettings; //fallbackSettings.jsから設定を取得
+// dev.config.jsonから設定を取得
+const devSettings = JSON.parse(fs.readFileSync('./dev.config.json', 'utf-8'));
+const { fallbackImage, wordpress, WordPressPort, WordPressThemeName } = devSettings;
 
 /** 各ファイルの名称、path情報を配列に格納する設定 */
 const inputJsArray = globSync('./src/**/*.js', {

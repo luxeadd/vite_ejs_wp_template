@@ -1,9 +1,11 @@
 import fs from 'fs';
 
-const filePath = './dev.config.js';
+const filePath = './dev.config.json';
 const setFallbackImage = (value) => {
   const fileContent = fs.readFileSync(filePath, 'utf8');
-  const updatedContent = fileContent.replace(/fallbackImage: (true|false)/, `fallbackImage: ${value}`);
+  const config = JSON.parse(fileContent);
+  config.fallbackImage = value;
+  const updatedContent = JSON.stringify(config, null, 2);
   fs.writeFileSync(filePath, updatedContent, 'utf8');
 };
 
