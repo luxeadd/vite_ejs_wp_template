@@ -7,10 +7,9 @@ import { ViteEjsPlugin } from 'vite-plugin-ejs'; // ejs使用
 import liveReload from 'vite-plugin-live-reload'; //ライブリロード
 import VitePluginWebpAndPath from 'vite-plugin-webp-and-path'; //webp画像変換
 import viteImagemin from 'vite-plugin-imagemin'; //画像圧縮
-import { fallbackSettings } from './ejs.config.js'; //ejs.config.jsから設定を取得
-// import { SourceMap } from 'node:module';
+import { devSettings } from './dev.config.js'; //dev.config.jsから設定を取得
 
-const { fallbackWebp } = fallbackSettings; //fallbackSettings.jsからfallbackWebpを取得
+const { fallbackImage, wordpress, WordPressPort, WordPressThemeName } = devSettings; //fallbackSettings.jsから設定を取得
 
 /** 各ファイルの名称、path情報を配列に格納する設定 */
 const inputJsArray = globSync('./src/**/*.js', {
@@ -37,18 +36,20 @@ const inputScssArray = globSync('./src/**/*.scss', {
   ];
 });
 
-/** 各ファイル情報の配列をまとめて、Objectに設定 */
-const inputObj = Object.fromEntries(inputJsArray.concat(inputHtmlArray, inputScssArray));
+/** 各ファイル情報の配列をまとめて、Objectに設定 wordpressの場合はhtmlファイルを含めない*/
+const inputObj = wordpress
+  ? Object.fromEntries(inputJsArray.concat(inputScssArray))
+  : Object.fromEntries(inputJsArray.concat(inputHtmlArray, inputScssArray));
 
 /** Viteの設定 */
 export default defineConfig({
-  root: './src', //開発ディレクトリ設定
   base: './', //相対パスに設定
+  root: './src', //開発ディレクトリ設定
   publicDir: '../public', //publicディレクトリ設定
 
   build: {
-    outDir: '../dist', //出力場所の指定
-    emptyOutDir: fallbackWebp ? false : true, // fallbackWebpがtrueの場合はディレクトリを削除しない
+    outDir: wordpress ? `../my-themes/${WordPressThemeName}` : '../dist', //出力場所の指定
+    emptyOutDir: fallbackImage || wordpress ? false : true, // fallbackImageがtrueの場合はディレクトリを削除しない
     sourcemap: false, //jsのソースマップの設定
     minify: false, //圧縮を無効化
     rollupOptions: {
@@ -61,11 +62,9 @@ export default defineConfig({
           if (/\.( gif|jpeg|jpg|png|svg|webp| )$/.test(assetInfo.name)) {
             return 'assets/images/[name].[ext]'; //画像アセットの出力設定
           }
-
           if (/\.css$/.test(assetInfo.name)) {
             return 'assets/css/[name].[ext]'; //CSSアセットの出力設定
           }
-
           return 'assets/[name].[ext]'; //その他のファイルの出力設定
         }
       }
@@ -78,27 +77,22 @@ export default defineConfig({
   },
 
   server: {
-    port: 3200, // 任意のポート番号を書く
-    host: true //IPアドレス使用可能
-    // open: '/index.html', //起動時に自動でブラウザで開くページを指定（自動にしない場合はコメントアウト）
+    port: 3200, // 他の設定と被らないように3200に固定
+    strictPort: true, //ポートがすでに使用されている場合に他のポートを使用しない
+    host: true, //IPアドレスで表示
+    open: wordpress ? `http://localhost:${WordPressPort}` : '/', //起動時に自動でブラウザで開くページを指定
+    watch: {
+      usePolling: true, // ファイル変更をポーリングで監視
+    },
   },
-
-  // server: { //Docker環境（仮想環境）の場合以下の設定
-  //   port: 3000,//Dockerの設定でPortは3000にしています
-  //   host: true,//Dockerなどの仮想から外に出すためには　host:trueとする
-  //   strictPort: true,//ポートがすでに使用されている場合に、次に使用可能なポートを自動的に試さない設定にしておきます
-  //   watch: {
-  //     usePolling: true//Dockerなどの仮想の場合この設定をしておくと吉
-  //   }
-  // }
 
   plugins: [
     viteSassGlobImports(), // SCSSのインポートを自動化する（ワイルドカード使用可能）
-    liveReload(['parts/*.ejs', 'common/*.ejs', '../public/**/*.php']), //指定したファイルでもライブリロード可能にする
+    liveReload(['parts/*.ejs', 'common/*.ejs', '../my-themes/**/*']), //指定したファイルでもライブリロード可能にする
     ViteEjsPlugin({
-      fallbackWebp: fallbackWebp
+      fallbackImage: fallbackImage
     }),
-    fallbackWebp
+    fallbackImage
       ? //画像圧縮
         viteImagemin({
           gifsicle: {
@@ -129,11 +123,12 @@ export default defineConfig({
         })
       : //webp画像変換
         VitePluginWebpAndPath({
-          targetDir: './dist/',
+          // targetDir: './dist/',
+          targetDir: './my-themes/test/',
           imgExtensions: 'jpg,png',
-          textExtensions: 'html,css,ejs,js,php',
+          textExtensions: 'html,css,ejs,js',
           quality: 80,
           preserveOriginal: true // 元の画像を残す
         }),
-  ]
+  ],
 });

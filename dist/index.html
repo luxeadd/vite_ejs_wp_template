@@ -23,33 +23,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet" />
-    <!-- <script>
-    // cssとjsにキャッシュ対策のパラメーター付与
-    const now = new Date();
-    now.setHours(now.getHours() + 9);
-    const year = now.getFullYear();
-    const month = ('0' + (now.getMonth() + 1)).slice(-2);
-    const day = ('0' + now.getDate()).slice(-2);
-    const hours = ('0' + now.getHours()).slice(-2);
-    const minutes = ('0' + now.getMinutes()).slice(-2);
-    const timestamp = `${year}${month}${day}${hours}${minutes}`;
-    const cssLink = document.querySelector('link[href*="style.css"]');
-    if (cssLink) {
-      const href = cssLink.getAttribute('href');
-      cssLink.setAttribute('href', `${href}?v=${timestamp}`);
-    }
-    const script = document.querySelector('script[src*="script.js"]');
-    if (script) {
-      const src = script.getAttribute('src');
-      script.setAttribute('src', `${src}?v=${timestamp}`);
-    }
-  </script> -->
     <!-- css -->
     <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script type="module" crossorigin src="./assets/js/modules/modulepreload-polyfill.js"></script>
     <script type="module" crossorigin src="./assets/js/script.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/css/style.css?20240715223638" />
+    <link rel="stylesheet" crossorigin href="./assets/css/style.css?20240718120004" />
   </head>
   <body id="top">
     <div class="siteWrapper">
@@ -59,7 +38,7 @@
           <!-- ヘッダーロゴ -->
           <h1 class="p-header__logo">
             <a href="/">
-              <img src="./assets/images/common/logo.webp" alt="ロゴ" />
+              <img src="./assets/images/common/logo.png" alt="ロゴ" />
             </a>
           </h1>
           <!-- pcーメニュー -->
@@ -76,7 +55,7 @@
                   <li class="p-header-menu__subItem"><a href="">沿革</a></li>
                 </ul>
               </li>
-              <li class="p-header-menu__item"><a href="#sec1">事業紹介</a></li>
+              <li class="p-header-menu__item"><a href="./#sec1">事業紹介</a></li>
               <li class="p-header-menu__item"><a href="#sec2">サステナビリティ</a></li>
               <li class="p-header-menu__item"><a href="./news/">お知らせ</a></li>
               <li class="p-header-menu__item"><a href="#sec4">採用情報</a></li>
@@ -105,14 +84,14 @@
       <main>
         <div class="p-mv">
           <picture>
-            <source srcset="./assets/images/common/image1_sp.webp" width="300" height="300" media="(max-width:767px)" />
-            <img src="./assets/images/common/image1.webp" alt="ダミー画像" width="800" height="800" decoding="async" loading="lazy" />
+            <source srcset="./assets/images/common/image1_sp.jpg" width="300" height="300" media="(max-width:767px)" />
+            <img src="./assets/images/common/image1.jpg" alt="ダミー画像" width="800" height="800" decoding="async" loading="lazy" />
           </picture>
         </div>
         <div id="sec1" class="p-mv">
           <picture>
-            <source srcset="./assets/images/common/image1_sp.webp" width="300" height="300" media="(max-width:767px)" />
-            <img src="./assets/images/common/image1.webp" alt="ダミー画像" width="800" height="800" decoding="async" loading="lazy" />
+            <source srcset="./assets/images/common/image1_sp.jpg" width="300" height="300" media="(max-width:767px)" />
+            <img src="./assets/images/common/image1.jpg" alt="ダミー画像" width="800" height="800" decoding="async" loading="lazy" />
           </picture>
         </div>
         <div class="l-inner">
@@ -139,7 +118,7 @@
             <button class="c-panel" data-modal-open="medicalModal1">
               <span class="c-panel__img">
                 <picture>
-                  <img src="./assets/images/common/image1.webp" alt="" />
+                  <img src="./assets/images/common/image1.jpg" alt="" />
                 </picture>
               </span>
               <span class="c-panel__text">歯列矯正</span>
@@ -147,7 +126,7 @@
             <button class="c-panel" data-modal-open="medicalModal2">
               <span class="c-panel__img">
                 <picture>
-                  <img src="./assets/images/common/image1.webp" alt="" />
+                  <img src="./assets/images/common/image1.jpg" alt="" />
                 </picture>
               </span>
               <span class="c-panel__text">リンガルブラケット<br />矯正</span>
@@ -155,7 +134,7 @@
             <button class="c-panel" data-modal-open="medicalModal3">
               <span class="c-panel__img">
                 <picture>
-                  <img src="./assets/images/common/image1.webp" alt="" />
+                  <img src="./assets/images/common/image1.jpg" alt="" />
                 </picture>
               </span>
               <span class="c-panel__text">マウスピース矯正</span>
@@ -163,7 +142,7 @@
             <button class="c-panel" data-modal-open="medicalModal4">
               <span class="c-panel__img">
                 <picture>
-                  <img src="./assets/images/common/image1.webp" alt="" />
+                  <img src="./assets/images/common/image1.jpg" alt="" />
                 </picture>
               </span>
               <span class="c-panel__text">ホーム<br />ホワイトニング</span>
@@ -174,8 +153,8 @@
               <div class="c-modalMedical__inner">
                 <div class="c-modalMedical__img">
                   <picture>
-                    <source srcset="./assets/images/common/image1.webp" media="(max-width:767px)" />
-                    <img src="./assets/images/common/image1.webp" alt="" decoding="async" loading="lazy" />
+                    <source srcset="./assets/images/common/image1.jpg" media="(max-width:767px)" />
+                    <img src="./assets/images/common/image1.jpg" alt="" decoding="async" loading="lazy" />
                   </picture>
                 </div>
                 <div class="c-modalMedical__head">
@@ -195,8 +174,8 @@
               <div class="c-modalMedical__inner">
                 <div class="c-modalMedical__img">
                   <picture>
-                    <source srcset="./assets/images/common/image1.webp" media="(max-width:767px)" />
-                    <img src="./assets/images/common/image1.webp" alt="" decoding="async" loading="lazy" />
+                    <source srcset="./assets/images/common/image1.jpg" media="(max-width:767px)" />
+                    <img src="./assets/images/common/image1.jpg" alt="" decoding="async" loading="lazy" />
                   </picture>
                 </div>
                 <div class="c-modalMedical__head">
@@ -216,8 +195,8 @@
               <div class="c-modalMedical__inner">
                 <div class="c-modalMedical__img">
                   <picture>
-                    <source srcset="./assets/images/common/image1.webp" media="(max-width:767px)" />
-                    <img src="./assets/images/common/image1.webp" alt="" decoding="async" loading="lazy" />
+                    <source srcset="./assets/images/common/image1.jpg" media="(max-width:767px)" />
+                    <img src="./assets/images/common/image1.jpg" alt="" decoding="async" loading="lazy" />
                   </picture>
                 </div>
                 <div class="c-modalMedical__head">
@@ -237,8 +216,8 @@
               <div class="c-modalMedical__inner">
                 <div class="c-modalMedical__img">
                   <picture>
-                    <source srcset="./assets/images/common/image1.webp" media="(max-width:767px)" />
-                    <img src="./assets/images/common/image1.webp" alt="" decoding="async" loading="lazy" />
+                    <source srcset="./assets/images/common/image1.jpg" media="(max-width:767px)" />
+                    <img src="./assets/images/common/image1.jpg" alt="" decoding="async" loading="lazy" />
                   </picture>
                 </div>
                 <div class="c-modalMedical__head">
@@ -289,7 +268,7 @@
       <footer class="p-footer">
         <div class="p-footer__inner">
           <div class="p-footer__logo">
-            <a href=""><img src="./assets/images/common/logo.webp" alt="ロゴ" /></a>
+            <a href=""><img src="./assets/images/common/logo.png" alt="ロゴ" /></a>
           </div>
           <div class="p-footer__body">
             <ul class="p-footer__items">
