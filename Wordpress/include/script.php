@@ -17,7 +17,7 @@ function my_script_init()
 	//swiper.js読み込み
 	wp_enqueue_script('my-swiper', '//unpkg.com/swiper@8/swiper-bundle.min.js');
 		// 開発環境ではViteの開発サーバーからアセットを読み込む
-		wp_enqueue_style('vite-css', 'http://localhost:3200/sass/style.scss', [], null);
+		wp_enqueue_style('vite-css', 'http://localhost:3200/sass/styles.scss', [], null);
 		wp_enqueue_script('vite-js', 'http://localhost:3200/js/script.js', [], null, true);
 
 		// 本番環境ではビルドされたアセットを読み込む
