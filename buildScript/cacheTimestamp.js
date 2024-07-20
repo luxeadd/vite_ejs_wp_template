@@ -46,17 +46,17 @@ function processHtmlFiles(dir) {
 
             // リンクタグを置換
             const result = data.replace(
-              /<link rel="stylesheet" crossorigin href="(\.\/)?assets\/css\/style\.css" \/>/,
-              `<link rel="stylesheet" crossorigin href="$1assets/css/style.css?${dateTimeStr}" />`
+              /css\/style.css/,
+              `css/style.css?${dateTimeStr}`
             );
 
             // HTMLファイルを書き換える
             fs.writeFile(filePath, result, 'utf8', (err) => {
               if (err) {
-                console.error('ファイルの書き込みに失敗しました:', err);
+                console.error('cssパラメーターの書き込みに失敗しました:', err);
                 return;
               }
-              console.log(`HTMLファイルが正常に更新されました: ${filePath}`);
+              console.log(`cssパラメーターが正常に更新されました: ${filePath}`);
             });
           });
         }
@@ -66,4 +66,4 @@ function processHtmlFiles(dir) {
 }
 
 // distディレクトリから処理を開始
-processHtmlFiles(path.join(__dirname, 'dist'));
+processHtmlFiles(path.join(__dirname, '../dist'));

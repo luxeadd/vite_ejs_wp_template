@@ -1,11 +1,11 @@
 <picture>
   <% if (spImg === 'true') { %>
-  <% if (webp === 'true' && fallbackWebp === true) { %>
+  <% if (webp === 'true' && fallbackImage === true) { %>
   <source srcset="<%- baseMeta.image %><%- img %><%- spImgName %>.webp" <% if (spWidth !== '') { %>width="<%- spWidth %>"<% } %> <% if (spHeight !== '') { %>height="<%- spHeight %>"<% } %> media="(max-width:767px)" type="image/webp">
   <% } %>
   <source srcset="<%- baseMeta.image %><%- img %><%- spImgName %><%- file %>" <% if (spWidth !== '') { %>width="<%- spWidth %>"<% } %> <% if (spHeight !== '') { %>height="<%- spHeight %>"<% } %> media="(max-width:767px)">
   <% } %>
-  <% if (webp === 'true' && fallbackWebp === true) { %>
+  <% if (webp === 'true' && fallbackImage === true) { %>
   <source srcset="<%- baseMeta.image %><%- img %>.webp" <% if (pcWidth !== '') { %>width="<%- pcWidth %>"<% } %> <% if (pcHeight !== '') { %>height="<%- pcHeight %>"<% } %> type="image/webp">
   <% } %>
   <img src="<%- baseMeta.image %><%- img %><%- file %>" alt="<%- alt %>" <% if (pcWidth !== '') { %>width="<%- pcWidth %>"<% } %> <% if (pcHeight !== '') { %>height="<%- pcHeight %>"<% } %> <% if (async === 'true') { %>decoding="async" <% } %> <% if (lazy === 'true') { %>loading="lazy" <% } %>>
