@@ -6,7 +6,7 @@
 - GitHubActions自動デプロイ、docker・wp-cli対応
 
 ## ファイル構成   
-∟ dist ・・・本番用  
+∟ dist ・・・本番用（ejs）  
 　∟ assets  
 　　∟ css  
 　　∟ images  
@@ -75,7 +75,7 @@
 2. ターミナルを開く
 3. `npm i`をターミナルへ入力
 4. ダウンロードが始まります
-5. `npm run dev`でタスクランナーが起動します
+5. `npm run dev`で開発ブラウザが起動します
 - `npm run build`でファイルを書き出す  
 
 以下仕様に合わせて使い分けてください
@@ -115,7 +115,7 @@ chmod +x /tmp/wp-install.sh
 ```
 mv WordPress my-themes/任意の名前
 ```
-13. `npm run dev`でタスクランナーが起動します
+13. `npm run dev`で開発ブラウザが起動します
 - `npm run build`でファイルを書き出す  
 
 以下仕様に合わせて使い分けてください
