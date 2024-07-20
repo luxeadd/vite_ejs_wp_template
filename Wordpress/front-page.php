@@ -15,7 +15,7 @@ $args = [
 'async' => 'true',
 'lazy' => 'true',
 ];
-get_template_part('tmp/picture', null, $args);
+get_template_part('parts/picture', null, $args);
 ?>
 <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
 <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>

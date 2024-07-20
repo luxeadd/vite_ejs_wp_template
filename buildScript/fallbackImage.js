@@ -4,7 +4,7 @@
 // -----------------------------------
 import fs from 'fs';
 
-const filePath = '../dev.config.json';
+const filePath = './dev.config.json';
 const setFallbackImage = (value) => {
   const fileContent = fs.readFileSync(filePath, 'utf8');
   const config = JSON.parse(fileContent);
