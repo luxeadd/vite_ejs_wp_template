@@ -24,7 +24,7 @@
 　　∟ utility ・・・共通SCSS  
 　　∟ object ・・・FLOCSS対応  
 　　∟ styles.scss ・・・インクルード用SCSS  
-∟ Wordpress ・・・WordPressテンプレートファイル   
+∟ WordPress ・・・WordPressテンプレートファイル   
 ∟ public ・・・viteで加工不要のファイル（画像など）  
 ∟ buildScript ・・・コマンド実行用ファイル  
 ∟ dev.config.json ・・・開発用設定ファイル  
