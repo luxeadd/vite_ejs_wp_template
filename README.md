@@ -111,8 +111,11 @@ chmod +x /tmp/wp-install.sh
 ```
 10. `npm i`をターミナルへ入力
 11. ダウンロードが始まります
-12. WordPress反映用フォルダ`my-themes`が作成されるので`Wordpress`フォルダを`my-themes`内に移動しフォルダ名とstyle.css内記述をテーマ名に変更
-5. `npm run dev`でタスクランナーが起動します
+12. WordPress反映用フォルダ`my-themes`が作成されるので`Wordpress`フォルダを`my-themes`内に移動しフォルダ名とstyle.css内記述をテーマ名に変更  
+```
+mv WordPress my-themes/任意の名前
+```
+13. `npm run dev`でタスクランナーが起動します
 - `npm run build`でファイルを書き出す  
 
 以下仕様に合わせて使い分けてください
