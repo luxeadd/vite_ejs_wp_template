@@ -1,4 +1,8 @@
-//cssにキャッシュ対策のパラメーター付与 ※直接htmlで記述するとvite-plugin-sass-glob-importが動作しないため、本ファイルで記述
+// -----------------------------------
+//cssにキャッシュ対策のパラメーター付与 
+//※直接htmlで記述するとvite-plugin-sass-glob-importが動作しないため、本ファイルで記述
+// -----------------------------------
+
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
