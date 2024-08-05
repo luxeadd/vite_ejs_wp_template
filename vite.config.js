@@ -125,8 +125,7 @@ export default defineConfig({
         })
       : //webp画像変換
         VitePluginWebpAndPath({
-          // targetDir: './dist/',
-          targetDir: './my-themes/test/',
+          targetDir: wordpress ? `./my-themes/${WordPressThemeName}` : './dist',
           imgExtensions: 'jpg,png',
           textExtensions: 'html,css,ejs,js',
           quality: 80,
