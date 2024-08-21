@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "restart": "vite build && vite dev",
     "format": "prettier --write 'dist/**/*.html' 'dist/*.html' && find dist -type f -name '*.html' -exec sed -i '' '/^$/d' {} + && node buildScript/cacheTimestamp.js",
     "build-format": "npm run build && npm run format",
     "build-fallback": "npm run build && node buildScript/fallbackImage.js true && npm run build && node buildScript/fallbackImage.js false",

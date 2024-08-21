@@ -1,5 +1,5 @@
 {
-  "wordpress": true,
+  "wordpress": false,
   "WordPressPort": 9092,
   "WordPressThemeName": "test",
   "fallbackImage": false
