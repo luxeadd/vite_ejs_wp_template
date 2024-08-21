@@ -51,6 +51,7 @@ export default defineConfig({
     emptyOutDir: fallbackImage || wordpress ? false : true, // fallbackImageがtrueの場合はディレクトリを削除しない
     sourcemap: false, //jsのソースマップの設定
     minify: false, //圧縮を無効化
+    polyfillModulePreload: false, //ModulePreload_polyfillの有無
     rollupOptions: {
       input: inputObj, //Globで該当ファイル名取得してObjectにしたもの
       output: {
