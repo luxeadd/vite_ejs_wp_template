@@ -27,15 +27,12 @@ const inputHtmlArray = globSync(['src/**/*.html'], {
 const inputScssArray = globSync('./src/**/*.scss', {
   ignore: ['src/sass/**/_*.scss']
 }).map((file) => {
-  const fileName = file.slice(file.lastIndexOf('/') + 1, file.length - path.extname(file).length);
-  return [
-    // path.relative(
-    //   "src",
-    //   file.slice(0, file.length - path.extname(file).length)
-    // ),
-    fileName,
-    fileURLToPath(new URL(file, import.meta.url))
-  ];
+  return [path.relative('src/sass', file.slice(0, file.length - path.extname(file).length)), fileURLToPath(new URL(file, import.meta.url))];
+  // const fileName = file.slice(file.lastIndexOf('/') + 1, file.length - path.extname(file).length);
+  // return [
+  //   fileName,
+  //   fileURLToPath(new URL(file, import.meta.url))
+  // ];
 });
 
 /** 各ファイル情報の配列をまとめて、Objectに設定 wordpressの場合はhtmlファイルを含めない*/
