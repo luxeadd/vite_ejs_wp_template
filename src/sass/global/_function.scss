@@ -18,6 +18,9 @@
 @function rem($pixels) {
   @return calc(#{$pixels} / 16 * 1rem);
 }
+// @function rem($pixels) {
+//   @return math.div($pixels, 16) * 1rem;
+// }
 
 //レスポンシブ可変フォント設定
 @function rfz(
