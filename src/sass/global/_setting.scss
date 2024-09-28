@@ -6,7 +6,7 @@ $inner: calc($innerValue * 1px);
 
 :root {
   --innerValue: 1100;
-  --inner: var(--innerValue) * 1px;
+  --inner: calc(var(--innerValue) * 1px);
   --padding-pc: 25px;
   --padding-sp: 20px;
   // フォントウェイト
@@ -36,6 +36,10 @@ $inner: calc($innerValue * 1px);
   --base-line-height: 1.5;
   // 差異時間
   --duration: 0.3s ease;
+  // line-heightハーフレンディング打ち消し
+  --leading-trim: calc((1em - 1lh) / 2);
+  /* デザインカンプで取得した余白が32pxの場合 */
+  // margin-block-start: calc(32px + var(--leading-trim));
 }
 
 /********************************

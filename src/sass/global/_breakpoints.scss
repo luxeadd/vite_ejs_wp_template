@@ -38,6 +38,7 @@ $mediaquerys: (
     md: "screen and (max-width: #{map-get($breakpoints,'md')}px)",
     mdOut: "screen and (min-width: #{map-get($breakpoints,'md') + 1}px)",
     lg: "print, screen and (max-width: #{map-get($breakpoints,'lg')}px)",
+    lgOut: "screen and (min-width: #{map-get($breakpoints,'lg') + 1}px)",
     xl: "screen and (min-width: #{map-get($breakpoints,'xl')}px)",
   );
 
