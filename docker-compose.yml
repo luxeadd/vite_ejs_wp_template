@@ -39,6 +39,7 @@ services:
       - wordpress_data_vitetest:/var/www/html # WordPressのデータを永続化するためのボリュームマッピング ※新規プロジェクト変更必要、例：wordpress_data_project2:/var/www/html
       - ./my-themes:/var/www/html/wp-content/themes/ # 自身のテーマのディレクトリと共有
       - ./wp-install.sh:/tmp/wp-install.sh # インストールスクリプトを共有
+      - ./php.ini:/usr/local/etc/php/conf.d/php-custom.ini # php.ini設定
     ports:
       - "9092:80" #localhostポート ※新規プロジェクト変更必要、例：ports: "9051:80"
     # restart: always # コンテナが停止した場合に自動的に再起動する
