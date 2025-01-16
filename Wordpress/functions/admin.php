@@ -15,6 +15,22 @@ function re_register_post_tag_taxonomy()
 add_action('init', 're_register_post_tag_taxonomy', 1);
 
 
+// 投稿一覧にアイキャッチ画像を表示
+function add_thumbnail_column($columns) {
+	$columns['thumbnail'] = 'アイキャッチ画像';
+	return $columns;
+}
+add_filter('manage_posts_columns', 'add_thumbnail_column');
+
+function display_thumbnail_column($column, $post_id) {
+	if ($column === 'thumbnail') {
+			$thumbnail = get_the_post_thumbnail($post_id, array(50, 50));
+			echo $thumbnail ? $thumbnail : 'なし';
+	}
+}
+add_action('manage_posts_custom_column', 'display_thumbnail_column', 10, 2);
+
+
 //投稿の名前変更
 function Change_menulabel()
 {
@@ -75,8 +91,8 @@ add_filter('menu_order', 'my_custom_menu_order');
 
 
 // サイドメニューのサブメニューを非表示
-function remove_submenus() {
-  // 投稿
-  remove_submenu_page( 'edit.php', 'edit-tags.php?taxonomy=post_tag' ); // タグ
-}
-add_action( 'admin_menu', 'remove_submenus', 999 );
+// function remove_submenus() {
+//   // 投稿
+//   remove_submenu_page( 'edit.php', 'edit-tags.php?taxonomy=post_tag' ); 
+// }
+// add_action( 'admin_menu', 'remove_submenus', 999 );

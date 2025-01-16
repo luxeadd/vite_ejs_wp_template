@@ -36,3 +36,18 @@ add_action('manage_qa_posts_custom_column', function ($column, $post_id) {
       }
   }
 }, 10, 2);
+
+
+//ACFの項目を一覧画面に表示
+// function add_posts_columns( $columns ) {
+//   $columns['year'] = '西暦';
+//   return $columns;
+// }
+// function custom_posts_column( $column_name, $post_id ) {
+//   if ( $column_name == 'year' ) {
+//     $year = get_post_meta( $post_id, 'year', true );
+//     echo ( $year ) ? $year : '－';
+//   }
+// }
+// add_filter( 'manage_history_posts_columns', 'add_posts_columns' );
+// add_action( 'manage_history_posts_custom_column', 'custom_posts_column', 10, 2 );
